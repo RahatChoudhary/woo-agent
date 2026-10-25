@@ -1,0 +1,33 @@
+{
+  "name": "woo-agent",
+  "version": "1.0.0",
+  "description": "Woo Agent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RahatChoudhary/woo-agent.git"
+  },
+  "keywords": [],
+  "author": "Rahat Ali <rahatchaodhary@gmail.com>",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/RahatChoudhary/woo-agent/issues"
+  },
+  "homepage": "https://github.com/RahatChoudhary/woo-agent#readme",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@woocommerce/woocommerce-rest-api": "^1.0.2",
+    "dotenv": "^18.0.9",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
