@@ -1,6 +1,6 @@
 import "dotenv/config";
 import Anthropic from "@anthropic-ai/sdk";
-import { getLowStockProducts, listOrders } from "./wc.ts";
+import { getLowStockProducts, getOrder, listOrders } from "./wc.ts";
 
 const client = new Anthropic();
 const MODEL = "claude-sonnet-5-5";
@@ -27,6 +27,15 @@ const tools: Anthropic.Tool[] = [
       },
     },
   },
+  {
+    name: "get_order",
+    description: "Get full details of one order by its order number. Use when the user mentions a specific order.",
+    input_schema: {
+        type: "object",
+        properties: { id: { type: "number", description: "Order number, for example 1042" } },
+        required: ["id"],
+    },
+  },
 ];
 
 async function runTool(name: string, input: any): Promise<string> {
@@ -35,6 +44,8 @@ async function runTool(name: string, input: any): Promise<string> {
       return JSON.stringify(await getLowStockProducts(input.threshold ?? 5));
     case "list_orders":
       return JSON.stringify(await listOrders(input.status, input.limit ?? 20));
+    case "get_order":
+      return JSON.stringify(await getOrder(input.id));
     default:
       return `Unknown tool: ${name}`;
   }
