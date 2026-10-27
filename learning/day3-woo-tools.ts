@@ -1,6 +1,6 @@
 import "dotenv/config";
 import Anthropic from "@anthropic-ai/sdk";
-import { getLowStockProducts, getOrder, listOrders } from "./wc.ts";
+import { getLowStockProducts, getOrder, listOrders } from "../src/wc.ts";
 
 const client = new Anthropic();
 const MODEL = "claude-sonnet-5-5";

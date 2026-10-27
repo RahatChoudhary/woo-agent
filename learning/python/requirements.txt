@@ -1,0 +1,4 @@
+woocommerce
+python-dotenv
+anthropic
+urllib3<2

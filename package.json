@@ -4,7 +4,9 @@
   "description": "Woo Agent",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "chat": "tsx src/cli.ts",
+    "test:wc": "tsx scripts/test-wc.ts"
   },
   "repository": {
     "type": "git",

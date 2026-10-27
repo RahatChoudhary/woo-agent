@@ -57,3 +57,32 @@ export async function getOrder(id: number) {
     customer_note: o.customer_note,
   };
 }
+
+export async function searchProducts(query: string) {
+  const res = await wc.get("products", { search: query, per_page: 20 });
+  return res.data.map((p: any) => ({
+    id: p.id, name: p.name, sku: p.sku, price: p.price,
+    regular_price: p.regular_price, sale_price: p.sale_price, stock: p.stock_quantity, status: p.status,
+  }));
+}
+
+export async function getCustomerByEmail(email: string) {
+  const res = await wc.get("customers", { email });
+  return res.data.map((c: any) => ({
+    id: c.id, name: `${c.first_name} ${c.last_name}`.trim(), email: c.email,
+    city: c.billing?.city, orders_count: c.orders_count, total_spent: c.total_spent,
+  }));
+}
+
+export async function updateProductPrice(id: number, regularPrice: string, salePrice?: string) {
+  const body: Record<string, string> = { regular_price: regularPrice };
+  if (salePrice !== undefined) body.sale_price = salePrice;
+  const res = await wc.put(`products/${id}`, body);
+  const p = res.data;
+  return { id: p.id, name: p.name, regular_price: p.regular_price, sale_price: p.sale_price };
+}
+
+export async function updateStock(id: number, quantity: number) {
+  const res = await wc.put(`products/${id}`, { manage_stock: true, stock_quantity: quantity });
+  return { id: res.data.id, name: res.data.name, stock: res.data.stock_quantity };
+}
